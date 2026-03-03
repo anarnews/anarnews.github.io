@@ -1,0 +1,20 @@
+backend:
+  name: git-gateway
+  branch: main # Sitenin GitHub'daki ana dalı
+
+media_folder: "images" # Panele yüklediğin haber resimlerinin kaydedileceği klasör
+public_folder: "/images"
+
+collections:
+  - name: "haberler"
+    label: "Haberler"
+    folder: "haberler" # Yazdığın haber metinlerinin kaydedileceği klasör
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Başlık", name: "title", widget: "string"}
+      - {label: "Yayın Tarihi", name: "date", widget: "datetime"}
+      - {label: "Kapak Resmi", name: "thumbnail", widget: "image", required: false}
+      - {label: "Yazar", name: "author", widget: "string", default: "Ahmet Nar"}
+      - {label: "Özet (Kısa Açıklama)", name: "description", widget: "text"}
+      - {label: "Haber İçeriği", name: "body", widget: "markdown"}
