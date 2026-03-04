@@ -3,18 +3,25 @@ backend:
   branch: main
 
 media_folder: "images"
-public_folder: "/images"
+public_folder: "images"
 
 collections:
-  - name: "haberler"
-    label: "Haberler"
-    folder: "haberler"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - {label: "Başlık", name: "title", widget: "string"}
-      - {label: "Yayın Tarihi", name: "date", widget: "datetime"}
-      - {label: "Kapak Resmi", name: "thumbnail", widget: "image", required: false}
-      - {label: "Yazar", name: "author", widget: "string", default: "Ahmet Nar"}
-      - {label: "Özet", name: "description", widget: "text"}
-      - {label: "Haber İçeriği", name: "body", widget: "markdown"}
+  - name: "veritabani"
+    label: "Haber Veritabanı"
+    files:
+      - label: "Tüm Haberleri Yönet"
+        name: "haberler"
+        file: "haberler.json" # İşte sihir burada: Tüm haberler tek bir dosyada toplanacak
+        fields:
+          - label: "Haber Listesi"
+            name: "haber_listesi"
+            widget: "list"
+            collapsed: false
+            summary: '{{fields.title}} - {{fields.date | date("DD/MM/YYYY")}}'
+            fields:
+              - {label: "Başlık", name: "title", widget: "string"}
+              - {label: "Yayın Tarihi", name: "date", widget: "datetime"}
+              - {label: "Kapak Resmi", name: "thumbnail", widget: "image", required: false}
+              - {label: "Yazar", name: "author", widget: "string", default: "Ahmet Nar"}
+              - {label: "Özet (Ana Sayfada Çıkacak)", name: "description", widget: "text"}
+              - {label: "Haber İçeriği", name: "body", widget: "markdown"}
