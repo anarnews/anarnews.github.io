@@ -11,13 +11,13 @@ collections:
     files:
       - label: "Tüm Haberleri Yönet"
         name: "haberler"
-        file: "haberler.json" # İşte sihir burada: Tüm haberler tek bir dosyada toplanacak
+        file: "haberler.json"
         fields:
           - label: "Haber Listesi"
             name: "haber_listesi"
             widget: "list"
             collapsed: false
-            summary: '{{fields.title}} - {{fields.date | date("DD/MM/YYYY")}}'
+            summary: '{{fields.title}}'
             fields:
               - {label: "Başlık", name: "title", widget: "string"}
               - {label: "Yayın Tarihi", name: "date", widget: "datetime"}
