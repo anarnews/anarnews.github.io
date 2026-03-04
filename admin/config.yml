@@ -23,5 +23,5 @@ collections:
               - {label: "Yayin Tarihi", name: "date", widget: "datetime"}
               - {label: "Kapak Resmi", name: "thumbnail", widget: "image", required: false}
               - {label: "Yazar", name: "author", widget: "string", default: "Ahmet Nar"}
-              - {label: "Ozet (Ana Sayfada Cikacak)", name: "description", widget: "text"}
+              - {label: "Ozet", name: "description", widget: "text"}
               - {label: "Haber Icerigi", name: "body", widget: "markdown"}
