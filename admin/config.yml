@@ -7,9 +7,9 @@ public_folder: "images"
 
 collections:
   - name: "veritabani"
-    label: "Haber Veritabanı"
+    label: "Haber Veritabani"
     files:
-      - label: "Tüm Haberleri Yönet"
+      - label: "Tum Haberleri Yonet"
         name: "haberler"
         file: "haberler.json"
         fields:
@@ -19,9 +19,9 @@ collections:
             collapsed: false
             summary: '{{fields.title}}'
             fields:
-              - {label: "Başlık", name: "title", widget: "string"}
-              - {label: "Yayın Tarihi", name: "date", widget: "datetime"}
+              - {label: "Baslik", name: "title", widget: "string"}
+              - {label: "Yayin Tarihi", name: "date", widget: "datetime"}
               - {label: "Kapak Resmi", name: "thumbnail", widget: "image", required: false}
               - {label: "Yazar", name: "author", widget: "string", default: "Ahmet Nar"}
-              - {label: "Özet (Ana Sayfada Çıkacak)", name: "description", widget: "text"}
-              - {label: "Haber İçeriği", name: "body", widget: "markdown"}
+              - {label: "Ozet (Ana Sayfada Cikacak)", name: "description", widget: "text"}
+              - {label: "Haber Icerigi", name: "body", widget: "markdown"}
