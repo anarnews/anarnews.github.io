@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eklemeli İmalatta Yeni Boyut - AnarNews</title>
+    <title>AnarNews - Haber Detayı</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.jpg" type="image/jpeg">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
 
@@ -24,7 +25,7 @@
         </header>
 
         <section class="hero article-hero">
-            <h1>EKLEMELİ İMALATTA YENİ BOYUT: FDM VE SLA</h1>
+            <h1 id="article-main-title">YÜKLENİYOR...</h1>
         </section>
     </div>
 
@@ -42,34 +43,24 @@
             <div class="article-content">
                 
                 <div class="article-meta">
-                    <span class="author-tag">Yazar: Ahmet Nar</span> | <span class="date-tag">Tarih: 3 Mart 2026</span>
+                    <span class="author-tag" id="article-author">Yazar: ...</span> | <span class="date-tag" id="article-date">Tarih: ...</span>
                 </div>
 
-                <img src="haber_resim.jpg" alt="3D Baskı Teknolojileri" class="article-main-img">
+                <img src="" alt="Haber Görseli" class="article-main-img" id="article-img" style="display:none;">
 
-                <h2>Mühendislikte Üretim Standartları Değişiyor</h2>
-                <p>Geleneksel talaşlı imalat yöntemleri yerini yavaş yavaş eklemeli imalata bırakıyor. Makine mühendisliği alanında prototipleme süreçlerini inanılmaz hızlandıran bu teknolojiler, akademik raporlamalardan endüstriyel seri üretime kadar geniş bir yelpazede kullanılıyor.</p>
-
-                <h3>FDM (Fused Deposition Modeling)</h3>
-                <p>Erimiş filament yığma teknolojisi olan FDM, özellikle RepRap projesiyle birlikte açık kaynak dünyasında büyük bir ivme kazandı. Termoplastik malzemelerin katman katman eritilerek üst üste dizilmesi mantığına dayanan bu sistem, düşük maliyetli hızlı prototipleme için hala sektörün vazgeçilmezi konumunda.</p>
-
-                <h3>SLA (Stereolithography)</h3>
-                <p>Eğer çok daha yüksek hassasiyet ve pürüzsüz yüzeyler gerekiyorsa, sıvı fotopolimer reçinenin UV lazerle kürlenmesi prensibine dayanan SLA teknolojisi devreye giriyor. Özellikle karmaşık geometrilere sahip parçaların milimetrik üretiminde, FDM'in ulaşamadığı detay seviyelerini SLA ile yakalamak mümkün.</p>
+                <h2 id="article-content-title">İçerik Yükleniyor...</h2>
+                
+                <div id="article-body">
+                    <p style="text-align:center; padding:50px;">Haber veritabanından çekiliyor, lütfen bekleyin...</p>
+                </div>
 
             </div>
 
             <div class="comments-section article-content">
-                <h2>Yorumlar (1)</h2>
+                <h2>Yorumlar (0)</h2>
                 
                 <div class="comments-list">
-                    <div class="comment-item">
-                        <div class="comment-avatar">ÜO</div> 
-                        <div class="comment-details">
-                            <h4>Ümit Özkan</h4>
-                            <span class="comment-date">3 Mart 2026, 14:30</span>
-                            <p>FDM ve SLA arasındaki farklar çok güzel özetlenmiş, mühendislik öğrencileri için faydalı bir yazı. Teşekkürler.</p>
-                        </div>
-                    </div>
+                    <p style="color:#888; font-style:italic;">Henüz yorum yapılmamış. İlk yorumu siz yapın!</p>
                 </div>
 
                 <div class="comment-form-container">
@@ -79,17 +70,14 @@
                             <label for="comment-name">Adınız Soyadınız</label>
                             <input type="text" id="comment-name" required>
                         </div>
-
                         <div class="form-group">
                             <label for="comment-email">E-Posta Adresiniz</label>
                             <input type="email" id="comment-email" required>
                         </div>
-                        
                         <div class="form-group checkbox-group">
                             <input type="checkbox" id="consent">
                             <label for="consent">Adım ve e-postam kaydedilsin.</label>
                         </div>
-
                         <div class="form-group">
                             <label for="comment-message">Yorumunuz</label>
                             <textarea id="comment-message" rows="4" required></textarea>
@@ -101,6 +89,51 @@
 
         </article>
     </div>
+
+    <script>
+        // Tıklanan linkteki "?id=0" gibi ID numarasını yakala
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        if (id !== null) {
+            fetch('haberler.json')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.haber_listesi && data.haber_listesi[id]) {
+                        const haber = data.haber_listesi[id];
+                        
+                        // Başlıkları doldur
+                        document.getElementById('article-main-title').innerText = haber.title.toUpperCase();
+                        document.getElementById('article-content-title').innerText = haber.title;
+                        document.title = haber.title + " - AnarNews";
+                        
+                        // Yazar ve Tarih bilgisi
+                        document.getElementById('article-author').innerText = "Yazar: " + haber.author;
+                        const dateObj = new Date(haber.date);
+                        document.getElementById('article-date').innerText = "Tarih: " + dateObj.toLocaleDateString('tr-TR');
+                        
+                        // Resim varsa göster
+                        if (haber.thumbnail) {
+                            const imgEl = document.getElementById('article-img');
+                            imgEl.src = haber.thumbnail;
+                            imgEl.style.display = 'block';
+                        }
+                        
+                        // CMS'teki yazıyı (Markdown) temiz HTML'e çevirip ekrana bas
+                        document.getElementById('article-body').innerHTML = marked.parse(haber.body);
+                    } else {
+                        document.getElementById('article-body').innerHTML = "<p>Haber bulunamadı.</p>";
+                        document.getElementById('article-main-title').innerText = "HATA";
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('article-body').innerHTML = "<p>Veritabanına bağlanılamadı.</p>";
+                });
+        } else {
+            document.getElementById('article-body').innerHTML = "<p>Geçersiz bağlantı.</p>";
+            document.getElementById('article-main-title').innerText = "HATA";
+        }
+    </script>
 
 </body>
 </html>
