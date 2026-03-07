@@ -23,14 +23,10 @@
                 </ul>
             </nav>
         </header>
-
-        <section class="hero article-hero">
-            <h1 id="article-main-title">YÜKLENİYOR...</h1>
-        </section>
+        <section class="hero article-hero"><h1 id="article-main-title">YÜKLENİYOR...</h1></section>
     </div>
 
     <div class="content-curtain article-curtain">
-        
         <div class="wave-divider">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".3" fill="#ffffff"></path>
@@ -41,85 +37,35 @@
 
         <article class="article-body-container">
             <div class="article-content">
-                
-                <div class="article-meta">
-                    <span class="author-tag" id="article-author">Yazar: ...</span> | <span class="date-tag" id="article-date">Tarih: ...</span>
-                </div>
-
+                <div class="article-meta"><span class="author-tag" id="article-author">Yazar: ...</span> | <span class="date-tag" id="article-date">Tarih: ...</span></div>
                 <img src="" alt="Haber Görseli" class="article-main-img" id="article-img" style="display:none;">
-
                 <h2 id="article-content-title">İçerik Yükleniyor...</h2>
-                
-                <div id="article-body">
-                    <p style="text-align:center; padding:50px;">Haber veritabanından çekiliyor, lütfen bekleyin...</p>
-                </div>
-
+                <div id="article-body"><p style="text-align:center; padding:50px;">Haber veritabanından çekiliyor, lütfen bekleyin...</p></div>
             </div>
-
-            <div class="comments-section article-content">
-                <h2>Yorumlar (0)</h2>
-                
-                <div class="comments-list">
-                    <p style="color:#888; font-style:italic;">Henüz yorum yapılmamış. İlk yorumu siz yapın!</p>
-                </div>
-
-                <div class="comment-form-container">
-                    <h3>Yorum Yap</h3>
-                    <form action="#" class="contact-form comment-form">
-                        <div class="form-group">
-                            <label for="comment-name">Adınız Soyadınız</label>
-                            <input type="text" id="comment-name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="comment-email">E-Posta Adresiniz</label>
-                            <input type="email" id="comment-email" required>
-                        </div>
-                        <div class="form-group checkbox-group">
-                            <input type="checkbox" id="consent">
-                            <label for="consent">Adım ve e-postam kaydedilsin.</label>
-                        </div>
-                        <div class="form-group">
-                            <label for="comment-message">Yorumunuz</label>
-                            <textarea id="comment-message" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn comment-btn">Yorumu Yayınla</button>
-                    </form>
-                </div>
-            </div>
-
         </article>
     </div>
 
     <script>
-        // Tıklanan linkteki "?id=0" gibi ID numarasını yakala
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
 
         if (id !== null) {
-            fetch('haberler.json')
+            fetch('haberler.json?v=' + new Date().getTime())
                 .then(response => response.json())
                 .then(data => {
                     if (data.haber_listesi && data.haber_listesi[id]) {
                         const haber = data.haber_listesi[id];
-                        
-                        // Başlıkları doldur
                         document.getElementById('article-main-title').innerText = haber.title.toUpperCase();
                         document.getElementById('article-content-title').innerText = haber.title;
                         document.title = haber.title + " - AnarNews";
-                        
-                        // Yazar ve Tarih bilgisi
                         document.getElementById('article-author').innerText = "Yazar: " + haber.author;
                         const dateObj = new Date(haber.date);
                         document.getElementById('article-date').innerText = "Tarih: " + dateObj.toLocaleDateString('tr-TR');
-                        
-                        // Resim varsa göster
                         if (haber.thumbnail) {
                             const imgEl = document.getElementById('article-img');
                             imgEl.src = haber.thumbnail;
                             imgEl.style.display = 'block';
                         }
-                        
-                        // CMS'teki yazıyı (Markdown) temiz HTML'e çevirip ekrana bas
                         document.getElementById('article-body').innerHTML = marked.parse(haber.body);
                     } else {
                         document.getElementById('article-body').innerHTML = "<p>Haber bulunamadı.</p>";
@@ -129,11 +75,7 @@
                 .catch(error => {
                     document.getElementById('article-body').innerHTML = "<p>Veritabanına bağlanılamadı.</p>";
                 });
-        } else {
-            document.getElementById('article-body').innerHTML = "<p>Geçersiz bağlantı.</p>";
-            document.getElementById('article-main-title').innerText = "HATA";
         }
     </script>
-
 </body>
 </html>
