@@ -5,14 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yazar Profili - AnarNews</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.jpg" type="image/jpeg">
 </head>
 <body>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+        <img src="logo.jpg" alt="AnarNews Logo" class="sidebar-logo" onerror="this.style.display='none'">
+        <a href="index.html">Ana Sayfa</a>
+        <button class="dropdown-btn">Kategoriler &#9660;</button>
+        <div class="dropdown-container">
+            <a href="index.html?kategori=Son Dakika">Son Dakika</a>
+            <a href="index.html?kategori=Siyaset">Siyaset</a>
+            <a href="index.html?kategori=Ekonomi">Ekonomi</a>
+            <a href="index.html?kategori=Spor">Spor</a>
+            <a href="index.html?kategori=Teknoloji">Teknoloji</a>
+            <a href="index.html?kategori=Kültür-Sanat">Kültür-Sanat</a>
+        </div>
+        <a href="yazarlar.html">Yazarlar</a>
+        <a href="iletisim.html">İletişim</a>
+    </div>
 
     <div class="top-section-fixed">
         <header>
             <nav>
-                <div class="logo-container"><a href="index.html"><img src="logo.jpg" alt="Logo" class="logo-img"></a></div>
-                <ul><li><a href="index.html">Ana Sayfa</a></li><li><a href="yazarlar.html">Tüm Yazarlar</a></li></ul>
+                <div class="logo-container">
+                    <a href="index.html"><img src="logo.jpg" alt="AnarNews Logo" class="logo-img"></a>
+                </div>
+                <div class="menu-btn" onclick="openNav()">&#9776;</div>
             </nav>
         </header>
         <section class="hero article-hero"><h1 id="author-page-title">Yükleniyor...</h1></section>
@@ -38,13 +58,24 @@
     </div>
 
     <script>
+        function openNav() { document.getElementById("mySidebar").style.width = "300px"; }
+        function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        for (var i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") dropdownContent.style.display = "none";
+                else dropdownContent.style.display = "block";
+            });
+        }
+
         const params = new URLSearchParams(window.location.search);
         const yazarAdi = params.get('ad');
 
         if (yazarAdi) {
             document.getElementById('author-page-title').innerText = yazarAdi;
             
-            // Yazarın Profilini Çek
             fetch('yazarlar.json?v=' + new Date().getTime())
                 .then(r => r.json())
                 .then(data => {
@@ -59,7 +90,6 @@
                     }
                 });
 
-            // Yazarın Haberlerini Çek
             fetch('haberler.json?v=' + new Date().getTime())
                 .then(r => r.json())
                 .then(data => {

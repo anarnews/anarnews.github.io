@@ -5,16 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AnarNews - Haber Detayı</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.jpg" type="image/jpeg">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
 
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+        <img src="logo.jpg" alt="AnarNews Logo" class="sidebar-logo" onerror="this.style.display='none'">
         <a href="index.html">Ana Sayfa</a>
         <button class="dropdown-btn">Kategoriler &#9660;</button>
         <div class="dropdown-container">
-            <a href="#">Son Dakika</a><a href="#">Siyaset</a><a href="#">Ekonomi</a>
+            <a href="index.html?kategori=Son Dakika">Son Dakika</a>
+            <a href="index.html?kategori=Siyaset">Siyaset</a>
+            <a href="index.html?kategori=Ekonomi">Ekonomi</a>
+            <a href="index.html?kategori=Spor">Spor</a>
+            <a href="index.html?kategori=Teknoloji">Teknoloji</a>
+            <a href="index.html?kategori=Kültür-Sanat">Kültür-Sanat</a>
         </div>
         <a href="yazarlar.html">Yazarlar</a>
         <a href="iletisim.html">İletişim</a>
@@ -23,9 +30,10 @@
     <div class="top-section-fixed">
         <header>
             <nav>
+                <div class="logo-container">
+                    <a href="index.html"><img src="logo.jpg" alt="AnarNews Logo" class="logo-img"></a>
+                </div>
                 <div class="menu-btn" onclick="openNav()">&#9776;</div>
-                <div class="logo-container"><img src="logo.jpg" alt="AnarNews Logo" class="logo-img"></div>
-                <ul><li><a href="index.html">Ana Sayfa</a></li></ul>
             </nav>
         </header>
         <section class="hero article-hero"><h1 id="article-main-title">YÜKLENİYOR...</h1></section>
@@ -86,7 +94,6 @@
                         document.getElementById('article-main-title').innerText = haber.title.toUpperCase();
                         document.title = haber.title;
                         document.getElementById('article-author').innerText = "Yazar: " + haber.author;
-                        // Yazara tıklayınca profiline gitmesi için link eklendi
                         document.getElementById('author-link').href = "yazar-detay.html?ad=" + encodeURIComponent(haber.author);
                         
                         if(haber.category) {

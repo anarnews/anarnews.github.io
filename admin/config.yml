@@ -20,7 +20,7 @@ collections:
             summary: '{{fields.title}}'
             fields:
               - {label: "Baslik", name: "title", widget: "string"}
-              - {label: "Kategori", name: "category", widget: "select", options: ["Son Dakika", "Siyaset", "Ekonomi", "Spor", "Teknoloji", "Kultur-Sanat"]}
+              - {label: "Kategori", name: "category", widget: "select", options: ["Son Dakika", "Siyaset", "Ekonomi", "Spor", "Teknoloji", "Kültür-Sanat", "Genel"]}
               - {label: "Yayin Tarihi", name: "date", widget: "datetime"}
               - {label: "Kapak Resmi", name: "thumbnail", widget: "image", required: false}
               - {label: "Yazar", name: "author", widget: "string", default: "Ahmet Nar"}
