@@ -22,7 +22,7 @@ collections:
             summary: '{{fields.title}}'
             fields:
               - {label: "Baslik", name: "title", widget: "string"}
-              - {label: "Kategori", name: "category", widget: "select", options: ["Son Dakika", "Siyaset", "Ekonomi", "Spor", "Teknoloji", "Kültür-Sanat", "Genel"]}
+              - {label: "Kategori", name: "category", widget: "select", options: ["Gündem", "Siyaset", "Dünya", "Ekonomi", "Borsa", "Döviz", "Altın", "Kripto Para", "Yerel Haberler", "Sağlık", "Eğitim", "Magazin", "Kültür & Sanat", "Sinema", "Kitap", "Seyahat", "Teknoloji", "Yapay Zeka", "Bilim", "Uzay", "Oyun (Gaming)", "Otomobil", "Spor", "Video Haber", "Foto Galeri"]}
               - {label: "Yayin Tarihi", name: "date", widget: "datetime"}
               - {label: "Kapak Resmi", name: "thumbnail", widget: "image", required: false}
               - {label: "Yazar (Otomatik)", name: "author", widget: "string", default: "{{user-name}}"}
