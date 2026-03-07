@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTC3R8D3WZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-TTC3R8D3WZ');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>İletişim - AnarNews</title>
@@ -61,9 +69,14 @@
         <div class="wave-divider"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#f4f4f9"></path></svg></div>
         <section class="news-section">
             <div class="contact-form-container" style="max-width: 800px; margin: 0 auto;">
+                
+                <div id="success-message" style="display:none; background-color: #27ae60; color: white; text-align: center; padding: 15px; font-weight: bold; font-size: 1.1rem; border-radius: 8px; margin-bottom: 20px;">
+                    Mesajınız başarıyla iletilmiştir. Teşekkür ederiz!
+                </div>
+
                 <h2>Yardım Bileti / Mesaj Gönder</h2>
                 
-                <form name="iletisim-bileti" method="POST" data-netlify="true" class="contact-form">
+                <form name="iletisim-bileti" method="POST" data-netlify="true" action="/iletisim.html?success=true" class="contact-form">
                     <div class="form-group">
                         <label>Adınız Soyadınız</label>
                         <input type="text" name="isim" required>
@@ -84,7 +97,6 @@
     </div>
 
     <script>
-        /* ORTAK MENÜ VE KAYDIRMA EFEKTİ SİSTEMİ */
         function openNav() { document.getElementById("mySidebar").style.width = "300px"; }
         function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
         var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -103,6 +115,12 @@
                 hero.style.opacity = opacity > 0 ? opacity : 0;
             });
         });
+
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            document.getElementById('success-message').style.display = 'block';
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
     </script>
 </body>
 </html>

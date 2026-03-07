@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTC3R8D3WZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-TTC3R8D3WZ');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AnarNews</title>
@@ -71,7 +79,6 @@
     </div>
 
     <script>
-        /* ORTAK MENÜ VE KAYDIRMA EFEKTİ SİSTEMİ */
         function openNav() { document.getElementById("mySidebar").style.width = "300px"; }
         function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
         var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -79,8 +86,8 @@
             dropdown[i].addEventListener("click", function() {
                 this.classList.toggle("active");
                 var dropdownContent = this.nextElementSibling;
-                if (dropdownContent.style.display === "block") dropdownContent.style.display = "none";
-                else dropdownContent.style.display = "block";
+                if (dropdownContent.style.display === "block") { dropdownContent.style.display = "none"; } 
+                else { dropdownContent.style.display = "block"; }
             });
         }
         window.addEventListener('scroll', function() {
@@ -91,7 +98,6 @@
             });
         });
 
-        /* KATEGORİ VE HABER ÇEKME MOTORU */
         const params = new URLSearchParams(window.location.search);
         const activeCategory = params.get('kategori');
 
