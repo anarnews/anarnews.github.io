@@ -5,95 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AnarNews</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.jpg" type="image/jpeg">
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+        <img src="logo.jpg" alt="AnarNews Logo" class="sidebar-logo" onerror="this.style.display='none'">
+        <a href="index.html">Ana Sayfa</a>
+        <button class="dropdown-btn">Kategoriler &#9660;</button>
+        <div class="dropdown-container">
+            <a href="#">Son Dakika</a>
+            <a href="#">Siyaset</a>
+            <a href="#">Ekonomi</a>
+            <a href="#">Spor</a>
+            <a href="#">Teknoloji</a>
+        </div>
+        <a href="yazarlar.html">Yazarlar</a>
+        <a href="iletisim.html">İletişim</a>
+    </div>
+
     <div class="top-section-fixed">
         <header>
             <nav>
-                <div class="logo-container">
-                    <img src="logo.jpg" alt="AnarNews Logo" class="logo-img">
-                </div>
+                <div class="menu-btn" onclick="openNav()">&#9776;</div>
+                <div class="logo-container"><img src="logo.jpg" alt="AnarNews Logo" class="logo-img"></div>
                 <ul>
                     <li><a href="index.html">Ana Sayfa</a></li>
                     <li><a href="yazarlar.html">Yazarlar</a></li>
-                    <li><a href="iletisim.html">İletişim</a></li>
                 </ul>
             </nav>
         </header>
-
         <section class="hero">
             <h1>GELECEĞİ OKUYORUZ</h1>
             <p>Haberin kalbi, doğru bilginin adresi.</p>
-            <button class="cta-btn">EN SON HABERLER</button>
         </section>
     </div>
 
     <div class="content-curtain">
-        <div class="wave-divider">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".3" fill="#ffffff"></path>
-                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".6" fill="#ffffff"></path>
-                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#f4f4f9"></path>
-            </svg>
-        </div>
-
+        <div class="wave-divider"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".3" fill="#ffffff"></path><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".6" fill="#ffffff"></path><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#f4f4f9"></path></svg></div>
         <section class="news-section">
-            <div class="news-grid" id="news-container">
-                <p style="grid-column: 1 / -1; text-align: center; color: #888; font-size: 1.2rem;">Haberler yükleniyor...</p>
-            </div>
+            <div class="news-grid" id="news-container"><p style="grid-column: 1 / -1; text-align: center;">Haberler yükleniyor...</p></div>
         </section>
     </div>
 
     <script>
-        if (window.netlifyIdentity) {
-            window.netlifyIdentity.on("init", user => {
-                if (!user) { window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; }); }
+        function openNav() { document.getElementById("mySidebar").style.width = "300px"; }
+        function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        for (var i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") { dropdownContent.style.display = "none"; } 
+                else { dropdownContent.style.display = "block"; }
             });
         }
-    </script>
 
-    <script>
         fetch('haberler.json?v=' + new Date().getTime())
-            .then(response => {
-                if (!response.ok) return { haber_listesi: [] };
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 const container = document.getElementById('news-container');
-                if (!data.haber_listesi || data.haber_listesi.length === 0) {
-                    container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; font-size: 1.2rem; color: #6e001a;">Henüz haber girilmemiş. Lütfen CMS paneline gidip ilk haberinizi yazın.</p>';
-                    return;
-                }
-                
+                if (!data.haber_listesi || data.haber_listesi.length === 0) return;
                 let html = '';
-                const reversedList = [...data.haber_listesi].reverse();
-                
-                reversedList.forEach((haber, index) => {
+                [...data.haber_listesi].reverse().forEach((haber, index) => {
                     const originalId = data.haber_listesi.length - 1 - index;
                     const img = haber.thumbnail ? haber.thumbnail : 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80';
-                    
-                    html += `
-                    <a href="haber-detay.html?id=${originalId}" style="text-decoration: none; color: inherit;">
+                    const cat = haber.category ? `<span class="news-tag">${haber.category}</span>` : '';
+                    html += `<a href="haber-detay.html?id=${originalId}" style="text-decoration: none; color: inherit;">
                         <article class="news-card">
                             <img src="${img}" alt="${haber.title}">
                             <div class="news-content">
+                                ${cat}
                                 <h3>${haber.title}</h3>
                                 <p>${haber.description}</p>
                             </div>
-                        </article>
-                    </a>
-                    `;
+                        </article></a>`;
                 });
                 container.innerHTML = html;
-            })
-            .catch(error => {
-                console.error(error);
-                document.getElementById('news-container').innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: red;">Veritabanına bağlanılamadı.</p>';
             });
     </script>
-
 </body>
 </html>

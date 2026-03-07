@@ -5,47 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AnarNews - Haber Detayı</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.jpg" type="image/jpeg">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
 
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Ana Sayfa</a>
+        <button class="dropdown-btn">Kategoriler &#9660;</button>
+        <div class="dropdown-container">
+            <a href="#">Son Dakika</a><a href="#">Siyaset</a><a href="#">Ekonomi</a>
+        </div>
+        <a href="yazarlar.html">Yazarlar</a>
+        <a href="iletisim.html">İletişim</a>
+    </div>
+
     <div class="top-section-fixed">
         <header>
             <nav>
-                <div class="logo-container">
-                    <img src="logo.jpg" alt="AnarNews Logo" class="logo-img">
-                </div>
-                <ul>
-                    <li><a href="index.html">Ana Sayfa</a></li>
-                    <li><a href="yazarlar.html">Yazarlar</a></li>
-                    <li><a href="iletisim.html">İletişim</a></li>
-                </ul>
+                <div class="menu-btn" onclick="openNav()">&#9776;</div>
+                <div class="logo-container"><img src="logo.jpg" alt="AnarNews Logo" class="logo-img"></div>
+                <ul><li><a href="index.html">Ana Sayfa</a></li></ul>
             </nav>
         </header>
         <section class="hero article-hero"><h1 id="article-main-title">YÜKLENİYOR...</h1></section>
     </div>
 
     <div class="content-curtain article-curtain">
-        <div class="wave-divider">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".3" fill="#ffffff"></path>
-                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".6" fill="#ffffff"></path>
-                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#f4f4f9"></path>
-            </svg>
-        </div>
+        <div class="wave-divider"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#f4f4f9"></path></svg></div>
 
         <article class="article-body-container">
             <div class="article-content">
-                <div class="article-meta"><span class="author-tag" id="article-author">Yazar: ...</span> | <span class="date-tag" id="article-date">Tarih: ...</span></div>
+                <div class="article-meta"><span class="news-tag" id="article-category" style="display:none;"></span> | <a href="#" id="author-link" style="text-decoration:none;"><span class="author-tag" id="article-author">Yazar: ...</span></a> | <span class="date-tag" id="article-date">Tarih: ...</span></div>
                 <img src="" alt="Haber Görseli" class="article-main-img" id="article-img" style="display:none;">
-                <h2 id="article-content-title">İçerik Yükleniyor...</h2>
-                <div id="article-body"><p style="text-align:center; padding:50px;">Haber veritabanından çekiliyor, lütfen bekleyin...</p></div>
+                <div id="article-body"><p>Yükleniyor...</p></div>
+            </div>
+
+            <div class="comments-section article-content">
+                <h2>Yorumlar</h2>
+                <div class="comment-form-container">
+                    <h3>Yorum Yap</h3>
+                    <form action="#" class="contact-form">
+                        <div class="form-group">
+                            <label>Adınız</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Yorumunuz</label>
+                            <textarea rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Gönder</button>
+                    </form>
+                </div>
             </div>
         </article>
     </div>
 
     <script>
+        function openNav() { document.getElementById("mySidebar").style.width = "300px"; }
+        function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        for (var i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") dropdownContent.style.display = "none";
+                else dropdownContent.style.display = "block";
+            });
+        }
+
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
 
@@ -56,24 +84,23 @@
                     if (data.haber_listesi && data.haber_listesi[id]) {
                         const haber = data.haber_listesi[id];
                         document.getElementById('article-main-title').innerText = haber.title.toUpperCase();
-                        document.getElementById('article-content-title').innerText = haber.title;
-                        document.title = haber.title + " - AnarNews";
+                        document.title = haber.title;
                         document.getElementById('article-author').innerText = "Yazar: " + haber.author;
-                        const dateObj = new Date(haber.date);
-                        document.getElementById('article-date').innerText = "Tarih: " + dateObj.toLocaleDateString('tr-TR');
+                        // Yazara tıklayınca profiline gitmesi için link eklendi
+                        document.getElementById('author-link').href = "yazar-detay.html?ad=" + encodeURIComponent(haber.author);
+                        
+                        if(haber.category) {
+                            document.getElementById('article-category').innerText = haber.category;
+                            document.getElementById('article-category').style.display = "inline-block";
+                        }
+                        
+                        document.getElementById('article-date').innerText = "Tarih: " + new Date(haber.date).toLocaleDateString('tr-TR');
                         if (haber.thumbnail) {
-                            const imgEl = document.getElementById('article-img');
-                            imgEl.src = haber.thumbnail;
-                            imgEl.style.display = 'block';
+                            document.getElementById('article-img').src = haber.thumbnail;
+                            document.getElementById('article-img').style.display = 'block';
                         }
                         document.getElementById('article-body').innerHTML = marked.parse(haber.body);
-                    } else {
-                        document.getElementById('article-body').innerHTML = "<p>Haber bulunamadı.</p>";
-                        document.getElementById('article-main-title').innerText = "HATA";
                     }
-                })
-                .catch(error => {
-                    document.getElementById('article-body').innerHTML = "<p>Veritabanına bağlanılamadı.</p>";
                 });
         }
     </script>

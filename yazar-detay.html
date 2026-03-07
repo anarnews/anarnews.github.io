@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yazar Profili - AnarNews</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="top-section-fixed">
+        <header>
+            <nav>
+                <div class="logo-container"><a href="index.html"><img src="logo.jpg" alt="Logo" class="logo-img"></a></div>
+                <ul><li><a href="index.html">Ana Sayfa</a></li><li><a href="yazarlar.html">Tüm Yazarlar</a></li></ul>
+            </nav>
+        </header>
+        <section class="hero article-hero"><h1 id="author-page-title">Yükleniyor...</h1></section>
+    </div>
+
+    <div class="content-curtain article-curtain">
+        <div class="wave-divider"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#f4f4f9"></path></svg></div>
+        
+        <section class="news-section">
+            <div class="author-profile-box" id="profile-box" style="display:none;">
+                <img src="" id="profile-img" class="author-profile-img">
+                <div class="author-profile-details">
+                    <h2 id="profile-name">İsim</h2>
+                    <p id="profile-bio">Biyografi</p>
+                </div>
+            </div>
+
+            <h2 style="text-align:center; color:#6e001a; margin-bottom:30px;">Yazarın Tüm Haberleri</h2>
+            <div class="news-grid" id="author-news-container">
+                <p style="text-align: center; grid-column: 1 / -1;">Haberler aranıyor...</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const yazarAdi = params.get('ad');
+
+        if (yazarAdi) {
+            document.getElementById('author-page-title').innerText = yazarAdi;
+            
+            // Yazarın Profilini Çek
+            fetch('yazarlar.json?v=' + new Date().getTime())
+                .then(r => r.json())
+                .then(data => {
+                    if(data.yazar_listesi) {
+                        const yazar = data.yazar_listesi.find(y => y.name === yazarAdi);
+                        if(yazar) {
+                            document.getElementById('profile-box').style.display = 'flex';
+                            document.getElementById('profile-name').innerText = yazar.name;
+                            document.getElementById('profile-bio').innerText = yazar.bio || "Bu yazar henüz bir biyografi girmemiş.";
+                            document.getElementById('profile-img').src = yazar.avatar ? yazar.avatar : 'https://via.placeholder.com/150';
+                        }
+                    }
+                });
+
+            // Yazarın Haberlerini Çek
+            fetch('haberler.json?v=' + new Date().getTime())
+                .then(r => r.json())
+                .then(data => {
+                    const container = document.getElementById('author-news-container');
+                    let html = '';
+                    if (data.haber_listesi) {
+                        data.haber_listesi.forEach((haber, index) => {
+                            if(haber.author === yazarAdi) {
+                                const img = haber.thumbnail ? haber.thumbnail : 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80';
+                                html += `<a href="haber-detay.html?id=${index}" style="text-decoration: none; color: inherit;">
+                                    <article class="news-card">
+                                        <img src="${img}">
+                                        <div class="news-content">
+                                            <h3>${haber.title}</h3>
+                                            <p>${haber.description}</p>
+                                        </div>
+                                    </article></a>`;
+                            }
+                        });
+                    }
+                    container.innerHTML = html !== '' ? html : "<p style='grid-column: 1 / -1; text-align:center;'>Yazarın henüz haberi bulunmuyor.</p>";
+                });
+        }
+    </script>
+</body>
+</html>
