@@ -64,13 +64,21 @@
             });
         }
 
-        // Kategori Filtreleme Motoru
+        /* YAZIYI KAYDIRDIKÇA GİZLEME EFEKTİ */
+        window.addEventListener('scroll', function() {
+            var heroText = document.getElementById('main-hero');
+            if(heroText) {
+                var opacity = 1 - (window.scrollY / 350); // 350px kaydırana kadar silinir
+                heroText.style.opacity = opacity > 0 ? opacity : 0;
+            }
+        });
+
         const params = new URLSearchParams(window.location.search);
         const activeCategory = params.get('kategori');
 
         if(activeCategory) {
-            document.getElementById('main-hero').style.display = 'none'; // Ana yazıyı gizle
-            document.getElementById('category-title').innerText = activeCategory; // Logonun altına kategori adını yaz
+            document.getElementById('main-hero').style.display = 'none';
+            document.getElementById('category-title').innerText = activeCategory;
             document.getElementById('category-title').style.display = 'block';
             document.title = activeCategory + " Haberleri - AnarNews";
         }
@@ -81,11 +89,9 @@
                 const container = document.getElementById('news-container');
                 if (!data.haber_listesi || data.haber_listesi.length === 0) return;
                 
-                // Haberin tıklandığında doğru sayfaya gitmesi için orijinal ID'lerini koruyoruz
                 let listWithIds = data.haber_listesi.map((haber, index) => ({...haber, originalId: index}));
                 let reversedList = listWithIds.reverse();
 
-                // Eğer kategori seçilmişse sadece o kategoriyi filtrele
                 if(activeCategory) {
                     reversedList = reversedList.filter(h => h.category === activeCategory);
                 }

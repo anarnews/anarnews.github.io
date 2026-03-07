@@ -106,7 +106,9 @@
                             document.getElementById('article-img').src = haber.thumbnail;
                             document.getElementById('article-img').style.display = 'block';
                         }
-                        document.getElementById('article-body').innerHTML = marked.parse(haber.body);
+                        
+                        // PANELDEKİ BOŞLUKLARI TANIMASI İÇİN { breaks: true } EKLENDİ
+                        document.getElementById('article-body').innerHTML = marked.parse(haber.body, { breaks: true });
                     }
                 });
         }
