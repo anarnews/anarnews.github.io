@@ -65,6 +65,7 @@
     </div>
 
     <script>
+        /* ORTAK MENÜ VE KAYDIRMA EFEKTİ SİSTEMİ */
         function openNav() { document.getElementById("mySidebar").style.width = "300px"; }
         function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
         var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -76,6 +77,13 @@
                 else dropdownContent.style.display = "block";
             });
         }
+        window.addEventListener('scroll', function() {
+            var heroes = document.querySelectorAll('.hero');
+            heroes.forEach(function(hero) {
+                var opacity = 1 - (window.scrollY / 350);
+                hero.style.opacity = opacity > 0 ? opacity : 0;
+            });
+        });
     </script>
 </body>
 </html>
